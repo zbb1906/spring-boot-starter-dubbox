@@ -1,8 +1,10 @@
 package com.ybveg.dubbox.config;
 
 import com.alibaba.dubbo.config.ApplicationConfig;
+import com.alibaba.dubbo.config.ConsumerConfig;
 import com.alibaba.dubbo.config.MonitorConfig;
 import com.alibaba.dubbo.config.ProtocolConfig;
+import com.alibaba.dubbo.config.ProviderConfig;
 import com.alibaba.dubbo.config.ReferenceConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
 import com.alibaba.dubbo.config.ServiceConfig;
@@ -13,9 +15,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @auther zbb
  * @create 2017/8/3
  */
-@ConfigurationProperties(prefix = "spring.dubbox")
-public class DubboProperties {
+@ConfigurationProperties(prefix = DubboxProperties.PREFIX)
+public class DubboxProperties {
 
+  final static String PREFIX = "spring.dubbox";
 
   /**
    * 扫描包地址
@@ -35,6 +38,14 @@ public class DubboProperties {
    */
   private MonitorConfig monitor;
 
+  /**
+   * 服务提供者缺省值配置
+   */
+  private ProviderConfig provider;
+  /**
+   * 服务消费者缺省值配置
+   */
+  private ConsumerConfig consumer;
   /**
    * 应用支持协议
    */
@@ -102,5 +113,21 @@ public class DubboProperties {
 
   public void setReferences(List<ReferenceConfig<?>> references) {
     this.references = references;
+  }
+
+  public ProviderConfig getProvider() {
+    return provider;
+  }
+
+  public void setProvider(ProviderConfig provider) {
+    this.provider = provider;
+  }
+
+  public ConsumerConfig getConsumer() {
+    return consumer;
+  }
+
+  public void setConsumer(ConsumerConfig consumer) {
+    this.consumer = consumer;
   }
 }

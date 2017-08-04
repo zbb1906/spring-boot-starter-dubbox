@@ -1,1 +1,3 @@
+org.springframework.context.ApplicationContextInitializer=com.ybveg.dubbox.config.DubboxContextInitializer
+org.springframework.context.ApplicationListener=com.ybveg.dubbox.config.DubboxHolderListener
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.ybveg.dubbox.config.DubboxAutoConfiguration
