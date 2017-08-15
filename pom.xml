@@ -5,7 +5,7 @@
 
   <groupId>com.ybveg.dubbox</groupId>
   <artifactId>spring-boot-starter-dubbox</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <packaging>jar</packaging>
 
   <name>spring-boot-starter-dubbox</name>
