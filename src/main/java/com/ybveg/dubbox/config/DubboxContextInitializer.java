@@ -2,7 +2,8 @@ package com.ybveg.dubbox.config;
 
 import com.alibaba.dubbo.config.ProtocolConfig;
 import com.alibaba.dubbo.config.spring.AnnotationBean;
-import java.util.List;
+import com.ybveg.dubbox.serialize.SerializationOptimizerImpl;
+import com.ybveg.dubbox.serialize.SerializeScanner;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.boot.bind.PropertiesConfigurationFactory;
@@ -45,19 +46,32 @@ public class DubboxContextInitializer implements
       ctx.getBeanFactory().addBeanPostProcessor(scanner);
       ctx.getBeanFactory().registerSingleton("annotationBean", scanner);
     }
-    registerProtocols(properties.getProtocols(), ctx.getBeanFactory());
+
+    registerProtocols(properties, ctx.getBeanFactory());
   }
 
   /**
    * 多协议支持 分别注入
    */
-  private void registerProtocols(List<ProtocolConfig> protocols,
+  private void registerProtocols(DubboxProperties properties,
       ConfigurableListableBeanFactory factory) {
-    if (protocols != null) {
-      for (ProtocolConfig protocol : protocols) {
+
+    boolean needOptimizer = false;
+    if (properties.getProtocols() != null) {
+      for (ProtocolConfig protocol : properties.getProtocols()) {
+
+        if ("dubbo".equalsIgnoreCase(protocol.getName()) && SerializationOptimizerImpl.class
+            .getName().equals(protocol.getOptimizer())) {
+          needOptimizer = true;
+        }
+
         String name = "DubboxProtocol-" + protocol.getId();
         factory.registerSingleton(name, protocol);
       }
+    }
+    if (properties.getSerialize() != null && needOptimizer) { // 注入序列化扫描器
+      factory.registerSingleton(SerializeScanner.class.getName(),
+          new SerializeScanner(properties.getSerialize()));
     }
   }
 }

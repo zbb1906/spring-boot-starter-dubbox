@@ -59,6 +59,12 @@ public class DubboxProperties {
    */
   private List<ReferenceConfig<?>> references;
 
+  /**
+   * 序列化配置
+   */
+  private SerializeConfig serialize;
+
+
   public String getScan() {
     return scan;
   }
@@ -129,5 +135,13 @@ public class DubboxProperties {
 
   public void setConsumer(ConsumerConfig consumer) {
     this.consumer = consumer;
+  }
+
+  public SerializeConfig getSerialize() {
+    return serialize;
+  }
+
+  public void setSerialize(SerializeConfig serialize) {
+    this.serialize = serialize;
   }
 }

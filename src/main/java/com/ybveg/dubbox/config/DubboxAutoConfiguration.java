@@ -5,6 +5,7 @@ import com.alibaba.dubbo.config.ConsumerConfig;
 import com.alibaba.dubbo.config.MonitorConfig;
 import com.alibaba.dubbo.config.ProviderConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
+import com.ybveg.dubbox.serialize.DubboxSpringFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -89,4 +90,8 @@ public class DubboxAutoConfiguration {
     return consumerConfig;
   }
 
+  @Bean
+  public DubboxSpringFactory initDubboxSpringFactory() {
+    return new DubboxSpringFactory();
+  }
 }
