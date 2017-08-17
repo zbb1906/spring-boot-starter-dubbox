@@ -43,7 +43,7 @@ public class SerializeScanner {
           Class<?> clazz = Class.forName(className);
           this.classes.add(clazz);
         } catch (ClassNotFoundException e) {
-          logger.error("dubbox SerializeScanner {} not found", className, e);
+          logger.info("dubbox SerializeScanner {} not found", className);
         }
       });
     }
@@ -74,8 +74,7 @@ public class SerializeScanner {
             result.add(clazz);
           } catch (ClassNotFoundException | IOException e) {
             logger
-                .error("dubbox SerializeScanner className not found or MetadataReader IOException",
-                    e);
+                .info("dubbox SerializeScanner className not found or MetadataReader IOException");
           }
         }
       }
@@ -96,7 +95,7 @@ public class SerializeScanner {
       try {
         list.addAll(Arrays.asList(resourcePatternResolver.getResources(s)));
       } catch (IOException e) {
-        logger.error("SerializeScanner getResource() error {}", s, e);
+        logger.info("SerializeScanner getResource() error {}", s);
       }
     }
     return list;
