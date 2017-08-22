@@ -42,6 +42,7 @@ public class SerializeScanner {
         try {
           Class<?> clazz = Class.forName(className);
           this.classes.add(clazz);
+          logger.debug("Dubbox SerializeScanner Class > " + clazz.getName());
         } catch (ClassNotFoundException e) {
           logger.info("dubbox SerializeScanner {} not found", className);
         }
@@ -72,6 +73,7 @@ public class SerializeScanner {
             String className = reader.getClassMetadata().getClassName();
             Class<?> clazz = Class.forName(className);
             result.add(clazz);
+            logger.debug("Dubbox SerializeScanner Class > " + clazz.getName());
           } catch (ClassNotFoundException | IOException e) {
             logger
                 .info("dubbox SerializeScanner className not found or MetadataReader IOException");

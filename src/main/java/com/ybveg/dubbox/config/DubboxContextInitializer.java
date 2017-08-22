@@ -61,7 +61,8 @@ public class DubboxContextInitializer implements
       for (ProtocolConfig protocol : properties.getProtocols()) {
 
         if ("dubbo".equalsIgnoreCase(protocol.getName()) && SerializationOptimizerImpl.class
-            .getName().equals(protocol.getOptimizer())) {
+            .getName()
+            .equals(protocol.getOptimizer())) { // 如果dubbo 协议并且序列化是 SerializationOptimizerImpl
           needOptimizer = true;
         }
 
@@ -69,9 +70,12 @@ public class DubboxContextInitializer implements
         factory.registerSingleton(name, protocol);
       }
     }
+
     if (properties.getSerialize() != null && needOptimizer) { // 注入序列化扫描器
-      factory.registerSingleton(SerializeScanner.class.getName(),
-          new SerializeScanner(properties.getSerialize()));
+//      SerializationOptimizerImpl.setBeanFactory(factory);
+      SerializeScanner scanner = new SerializeScanner(properties.getSerialize());
+      factory.registerSingleton(SerializeScanner.class.getName(), scanner);
+      SerializationOptimizerImpl.setScanner(scanner);
     }
   }
 }
