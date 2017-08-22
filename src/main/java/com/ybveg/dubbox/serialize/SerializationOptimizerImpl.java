@@ -2,6 +2,7 @@ package com.ybveg.dubbox.serialize;
 
 import com.alibaba.dubbo.common.serialize.support.SerializationOptimizer;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import org.slf4j.Logger;
@@ -30,6 +31,12 @@ public class SerializationOptimizerImpl implements SerializationOptimizer {
       classes.addAll(scanner.getSerializableClasses());
     }
 
+    classes.sort(new Comparator<Class>() {
+      @Override
+      public int compare(Class o1, Class o2) {
+        return o1.getName().compareTo(o2.getName());
+      }
+    });
     logger.info("Spring Boot Starter Dubbox Serializable Class Size:" + classes.size());
 //    classes.add(UserDto.class);
     return classes;
