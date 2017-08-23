@@ -35,15 +35,6 @@ public class DubboxAutoConfiguration {
     return registryConfig;
   }
 
-//	@Bean
-//	public ProtocolConfig requestProtocolConfig() {
-//		ProtocolConfig protocolConfig = dubboProperties.getProtocol();
-//		if (protocolConfig == null) {
-//			protocolConfig = new ProtocolConfig();
-//		}
-//		return protocolConfig;
-//	}
-
   @Bean
   public MonitorConfig requestMonitorConfig() {
     MonitorConfig monitorConfig = dubboProperties.getMonitor();
@@ -61,24 +52,6 @@ public class DubboxAutoConfiguration {
     }
     return providerConfig;
   }
-
-//	@Bean
-//	public ModuleConfig requestModuleConfig() {
-//		ModuleConfig moduleConfig = dubboProperties.getModule();
-//		if (moduleConfig == null) {
-//			moduleConfig = new ModuleConfig();
-//		}
-//		return moduleConfig;
-//	}
-
-//	@Bean
-//	public MethodConfig requestMethodConfig() {
-//		MethodConfig methodConfig = dubboProperties.getMethod();
-//		if (methodConfig == null) {
-//			methodConfig = new MethodConfig();
-//		}
-//		return methodConfig;
-//	}
 
   @Bean
   public ConsumerConfig requestConsumerConfig() {
