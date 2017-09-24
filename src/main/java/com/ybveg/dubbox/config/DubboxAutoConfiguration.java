@@ -5,6 +5,7 @@ import com.alibaba.dubbo.config.ConsumerConfig;
 import com.alibaba.dubbo.config.MonitorConfig;
 import com.alibaba.dubbo.config.ProviderConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
+import com.ybveg.dubbox.ReferenceProxyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -60,5 +61,17 @@ public class DubboxAutoConfiguration {
       consumerConfig = new ConsumerConfig();
     }
     return consumerConfig;
+  }
+
+  @Bean
+  public ReferenceProxyFactory referenceUtils(
+      ApplicationConfig application,
+      RegistryConfig registry,
+      ConsumerConfig consumer) {
+    ReferenceProxyFactory proxy = new ReferenceProxyFactory();
+    proxy.setApplication(application);
+    proxy.setRegistry(registry);
+    proxy.setConsumer(consumer);
+    return proxy;
   }
 }
