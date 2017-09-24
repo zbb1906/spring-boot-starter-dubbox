@@ -31,6 +31,8 @@ public class SerializationOptimizerImpl implements SerializationOptimizer {
       classes.addAll(scanner.getSerializableClasses());
     }
 
+    // 需要保证 消费者 和 提供者 需要序列化对象顺序 和 个数一致
+    // 目前在kryo 是如此 其他未验证
     classes.sort(new Comparator<Class>() {
       @Override
       public int compare(Class o1, Class o2) {
